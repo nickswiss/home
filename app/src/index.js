@@ -11,22 +11,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Routes
 import Root from "./routes/root";
 import Contact from "./routes/contact";
+import NavBar from "./components/NavBar";
+import Layout from "./components/Layout";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root/>,
-    },
-    {
-        path: "contacts/:contactId",
-        element: <Contact/>,
-    },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Root /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'blog', element: <Contact /> },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <RouterProvider router={router}>
+            <NavBar />
+        </RouterProvider>
     </React.StrictMode>
 );
 
